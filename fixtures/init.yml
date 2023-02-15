@@ -1,0 +1,8 @@
+parameters:
+  hash: $2a$12$KO.9E6sVc37EsAKg.IArR.zvrj4xIJWFTOOfAXwxUqkez51bKYx02
+
+App\Entity\User:
+  user_1:
+    email: stili.salim@yahoo.fr
+    password: <{hash}>
+    roles: ["ROLE_ADMIN"]
