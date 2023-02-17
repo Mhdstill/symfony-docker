@@ -7,6 +7,11 @@ use App\Repository\SignalSpotRepository;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\Timestampable;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Delete;
 
 #[ORM\Entity(repositoryClass: SignalSpotRepository::class)]
 #[ApiResource]
