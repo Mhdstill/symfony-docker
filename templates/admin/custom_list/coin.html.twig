@@ -1,0 +1,60 @@
+{% extends 'admin/custom_list/base.html.twig' %}
+
+{% block theadTable %}
+    <tr role="row">
+        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+            rowspan="1"
+            colspan="1" aria-sort="ascending"
+            aria-label="Name: activate to sort column descending" style="width: 144px;">
+            ID
+        </th>
+        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+            rowspan="1"
+            colspan="1" aria-sort="ascending"
+            aria-label="Name: activate to sort column descending" style="width: 144px;">
+            Nom
+        </th>
+       <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+            rowspan="1"
+            colspan="1" aria-sort="ascending"
+            aria-label="Name: activate to sort column descending" style="width: 144px;">
+            Image
+        </th>
+        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+            rowspan="1"
+            colspan="1" aria-sort="ascending"
+            aria-label="Name: activate to sort column descending" style="width: 144px;">
+            Actions
+        </th>
+    </tr>
+{% endblock %}
+
+
+{% block tbodyTable %}
+    {% for coin in coins %}
+        <tr>
+            <td>
+                {{ coin.id }}
+            </td>
+
+            <td>
+                {{ coin.name }}
+            </td>
+
+            <td>
+                {% if coin.image is defined and coin.image.name is defined %}
+                    <img src="{{ asset('media/'~ coin.image.name) }}" style="height:auto;width:100%" alt="{{ coin.image.name }}">
+                {% endif %}
+            </td>
+
+            <td>
+                <a href="{{ path('admin_edit_coin', {'id': coin.id}) }}"
+                   class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-2">
+                    <i class="fa-solid fa-pen"></i></a>
+                <a href="{{ path('admin_delete_coin', {'id': coin.id}) }}"
+                   class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-2">
+                    <i class="fa-solid fa-circle-minus"></i></a>
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}

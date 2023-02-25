@@ -1,0 +1,88 @@
+{% extends 'admin/custom_list/base.html.twig' %}
+
+{% block theadTable %}
+    <tr role="row">
+        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+            rowspan="1"
+            colspan="1" aria-sort="ascending"
+            aria-label="Name: activate to sort column descending" style="width: 144px;">
+            Coin
+        </th>
+        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+            rowspan="1"
+            colspan="1" aria-sort="ascending"
+            aria-label="Name: activate to sort column descending" style="width: 144px;">
+            Public
+        </th>
+        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+            rowspan="1"
+            colspan="1" aria-sort="ascending"
+            aria-label="Name: activate to sort column descending" style="width: 144px;">
+            Entry
+        </th>
+        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+            rowspan="1"
+            colspan="1" aria-sort="ascending"
+            aria-label="Name: activate to sort column descending" style="width: 144px;">
+            Stop
+        </th>
+        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+            rowspan="1"
+            colspan="1" aria-sort="ascending"
+            aria-label="Name: activate to sort column descending" style="width: 144px;">
+            Leverage
+        </th>
+        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+            rowspan="1"
+            colspan="1" aria-sort="ascending"
+            aria-label="Name: activate to sort column descending" style="width: 144px;">
+            Short
+        </th>
+        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+            rowspan="1"
+            colspan="1" aria-sort="ascending"
+            aria-label="Name: activate to sort column descending" style="width: 144px;">
+            Actions
+        </th>
+    </tr>
+{% endblock %}
+
+
+{% block tbodyTable %}
+    {% for futur in futurs %}
+        <tr>
+            <td>
+                {{ futur.coin.name }}
+            </td>
+
+            <td>
+                {% if futur.isPublic %} Oui {% else %} Non {% endif %}
+            </td>
+            
+            <td>
+                {{ futur.entry }}
+            </td>
+
+            <td>
+                {{ futur.stop }}
+            </td>
+
+            <td>
+                {{ futur.leverage }}
+            </td>
+
+            <td>
+                {% if futur.short %} Oui {% else %} Non {% endif %}
+            </td>
+
+            <td>
+                <a href="{{ path('admin_edit_futur', {'id': futur.id}) }}"
+                   class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-2">
+                    <i class="fa-solid fa-pen"></i></a>
+                <a href="{{ path('admin_delete_futur', {'id': futur.id}) }}"
+                   class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-2">
+                    <i class="fa-solid fa-circle-minus"></i></a>
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}

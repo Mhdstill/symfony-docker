@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index{% endblock %}
+
+{% block style %}
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{{ asset('asset/css/png.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="py-6 sm:px-6 lg:px-8">
+        <div>
+            <div class="sm:mx-auto sm:w-full sm:max-w-md">
+                <!-- <img src="" alt="logo" style="width: auto;height: 150px;display: block;margin:auto"> -->
+            </div>
+            <div class="mt-8 mb-8 sm:mx-auto sm:w-full sm:max-w-md">
+                <div class="bg-white py-10 px-4 shadow-lg sm:rounded-lg sm:px-10">
+
+                    {% if error %}
+                        <div class="alert alert-danger" role="alert">
+                            Vos identifiants sont incorrects. Veuillez réessayer.
+                        </div>
+                    {% endif %}
+
+                    {% for label, messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ label }}" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+
+                    <h2 class="mb-6 text-lg leading-9 text-gray-900">
+                        Connectez-vous à votre compte
+                    </h2>
+
+                    <form action="{{ path('app_login') }}" method="post">
+                        <input type="hidden" name="_target_path" value="{{ path('admin_list_user') }}"/>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+
+                        <div>
+                            <label for="username" class="block text-sm font-medium leading-7 text-gray-700">Email</label>
+                            <div class="mt-1 rounded-md shadow-sm">
+                                <input type="text" id="username" name="_username" class="block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" value="{{ last_username }}"/>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <div class="flex items-center justify-between">
+                                <label for="password" class="block text-sm font-medium leading-7 text-gray-700">
+                                    Mot de passe
+                                </label>
+                            </div>
+                            <div>
+                                <div class="mt-1 rounded-md shadow-sm">
+                                    <input type="password" id="password" name="_password" class="block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                        <span class="block w-full rounded-md shadow-sm">
+                            <button type="submit" style="background: rgb(211, 31, 61) !important;" class="inline-flex justify-center items-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md focus:outline-none transition duration-150 ease-in-out w-full flex justify-center py-3 px-4 border border-transparent font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:shadow-outline active:bg-blue-500 transition duration-150 ease-in-out text-white bg-blue-600 hover:bg-blue-500 focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700">
+                                Se connecter
+                            </button>
+                        </span>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

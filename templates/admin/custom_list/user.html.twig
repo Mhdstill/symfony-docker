@@ -1,0 +1,59 @@
+{% extends 'admin/custom_list/base.html.twig' %}
+
+{% block theadTable %}
+    <tr role="row">
+        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+            rowspan="1"
+            colspan="1" aria-sort="ascending"
+            aria-label="Name: activate to sort column descending" style="width: 144px;">
+            ID
+        </th>
+        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+            rowspan="1"
+            colspan="1" aria-sort="ascending"
+            aria-label="Name: activate to sort column descending" style="width: 144px;">
+            Email
+        </th>
+        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+            rowspan="1"
+            colspan="1" aria-sort="ascending"
+            aria-label="Name: activate to sort column descending" style="width: 144px;">
+            Roles
+        </th>
+        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+            rowspan="1"
+            colspan="1" aria-sort="ascending"
+            aria-label="Name: activate to sort column descending" style="width: 144px;">
+            Actions
+        </th>
+    </tr>
+{% endblock %}
+
+
+{% block tbodyTable %}
+    {% for user in users %}
+        <tr>
+            <td>
+                {{ user.id }}
+            </td>
+
+            <td>
+                {{ user.email }}
+            </td>
+
+            <td>
+                 {% for role in user.roles %}
+                    {{ role }} <br/>
+                {% endfor %}
+            </td>
+            <td>
+                <a href="{{ path('admin_edit_user', {'id': user.id}) }}"
+                   class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-2">
+                    <i class="fa-solid fa-pen"></i></a>
+                <a href="{{ path('admin_delete_user', {'id': user.id}) }}"
+                   class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-2">
+                    <i class="fa-solid fa-circle-minus"></i></a>
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}

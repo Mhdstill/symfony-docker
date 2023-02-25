@@ -1,0 +1,50 @@
+.pagination {
+    display: inline-block;
+    padding-top: 0px !important;
+}
+
+.pagination .current, .pagination a {
+    color: rgb(211, 31, 61);
+    float: left;
+    padding: 0.5rem 0.75rem;
+    line-height: 1.25;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #dddfeb;
+    margin-left: -1px;
+}
+.pagination a:hover {
+    color: rgb(211, 31, 61);
+    text-decoration: none;
+    background-color: #eaecf4;
+}
+
+.pagination .current{
+    background: rgb(211, 31, 61);
+    color: #fff;
+}
+
+.pagination a:hover{
+    text-decoration: none !important;
+}
+
+.action-btn{
+    width: 100px;
+    margin-bottom: 10px;
+    height: 32px;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+tr{
+    border-bottom: solid grey 1px;
+    vertical-align: middle;
+}
+
+th, td{
+    border: none;
+    text-align: center;
+    vertical-align: middle;
+}

@@ -23,6 +23,10 @@ security:
             provider: users
             jwt: ~
         main:
+            form_login:
+                    # "app_login" is the name of the route created previously
+                    login_path: app_login
+                    check_path: app_login
             json_login:
                 check_path: auth # The name in routes.yaml is enough for mapping
                 username_path: email
@@ -35,3 +39,4 @@ security:
         - { path: ^/docs, roles: PUBLIC_ACCESS } # Allows accessing API documentations and Swagger UI docs
         - { path: ^/auth, roles: PUBLIC_ACCESS }
        # - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/admin, roles: ROLE_ADMIN }

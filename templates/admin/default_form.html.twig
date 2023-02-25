@@ -1,0 +1,27 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block actions %}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Créer un {{ title }}</h6>
+        </div>
+        <div class="card-body">
+
+            {{ form(form) }}
+
+            {% if form.vars.data.imageName is defined and form.vars.data.imageName %}
+                {% set current_url = path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) %}
+                {% set entityName = current_url|split('/')[2] %}
+                <img src="{{ asset('asset/img/'~ entityName ~ "/" ~ form.vars.data.imageName) }}" height="100" alt="{{ form.vars.data.imageName }}">
+            {% endif %}
+
+        </div>
+
+    </div>
+
+{% endblock %}

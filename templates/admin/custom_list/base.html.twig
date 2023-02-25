@@ -1,0 +1,151 @@
+{% extends 'admin/base.html.twig' %}
+
+{% set currentRoute = app.request.get('_route') %}
+{# {% set entityName = app.request.get('_route')|replace({'bo_list':''}) %} #}
+
+{% block style %}
+    tr > td:last-of-type
+    {
+    width:50px;
+    text-align:center;
+    }
+{% endblock %}
+
+{% block actions %}
+
+    <div style="float:right">
+        {% if newActionPath is defined and newActionPath %}
+            <a href="{{ path(newActionPath) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                        class="fas fa-plus"></i>&nbsp; Nouveau</a>
+        {% endif %}
+
+        {% if importHeader is defined and importForm is defined %}
+            <button class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm" id="importDatas">
+                <i class="fa-solid fa-upload"></i>  Importer
+            </button>
+        {% endif %}
+
+        {% if exportAction is defined and exportAction %}
+            <a href="?export=true" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">
+                <i class="fa-solid fa-download"></i> Exporter</a>
+        {% endif %}
+
+        {% if otherHeaderActions is defined %}
+            {% for otherHeaderAction in otherHeaderActions %}
+                <a href="{{ otherHeaderAction['path'] }}]"
+                   class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="{{ otherHeaderAction['icon'] }}"></i>&nbsp; {{ otherHeaderAction['label'] }}</a>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    {#
+    <a href="{{ path('bo_clean_abonnement') }}" class="btn btn-warning"><i
+                class="fa-solid fa-broom" onClick="return confirm('Es-tu sûr ?')"></i>&nbsp;Clean </a>
+    #}
+{% endblock %}
+
+{% block content %}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Table des {{ title }}</h6>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0"
+                               role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                            <thead>
+                                {% block theadTable %}{% endblock %}
+                            </thead>
+
+                            <tbody>
+                                {% block tbodyTable %}{% endblock %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
+                            {{ countEntity }} entrées au total
+                        </div>
+                    </div>
+
+                    {#
+                    <div class="col-sm-12 col-md-7">
+                        <div style="text-align: right;">
+                        {{ knp_pagination_render(entityPaginate) }}
+                        </div>
+                    </div>
+                    #}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block modals %}
+
+
+    <div class="modal fade" id="delete-ask-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="border-bottom: none !important">
+                    <h2 class="modal-title h4 text-center" id="exampleModalLabel"
+                        style="margin-bottom: 0;font-family:'Kaushan Script';width:100%">
+                    </h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-xs-6 col-sm-6 offset-xs-3 offset-sm-3">
+                        <button onclick="$('#delete-ask-modal').modal('hide');" class="btn btn-primary">
+                            Non
+                        </button>
+                        <button style="float:right" id="valid-remove" class="btn btn-danger">Oui</button>
+                    </div>
+
+                    <p id="get-redirect-path" style="display: none"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if importHeader is defined and importForm is defined %}
+        <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="
+                        background-image: url({{ asset('asset/img/promotion_bg2.jpeg') }});
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        background-position: center center;
+                        ">
+                    <div class="modal-header" style="border-bottom: none !important">
+                        <h2 class="modal-title h4 text-center" id="exampleModalLabel"
+                            style="margin-bottom: 0;font-family:'Kaushan Script';width:100%">Importer Données
+                        </h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        En-tête : ( {% for h in importHeader %} {{ h }}; {% endfor %} )
+                        {{ form_start(importForm) }}
+                        {{ form_row(importForm.csv) }}
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        {{ form_row(importForm.submit) }}
+                        {{ form_end(importForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
