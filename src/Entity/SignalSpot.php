@@ -59,7 +59,7 @@ class SignalSpot
 
     #[ORM\Column]
     #[Groups(["spot"])]
-    private ?bool $isPublic = null;
+    private ?bool $isPublic = true;
 
     #[ORM\OneToMany(mappedBy: 'signalSpot', targetEntity: Target::class)]
     #[Groups(["spot"])]

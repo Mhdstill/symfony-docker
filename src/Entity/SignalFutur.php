@@ -67,7 +67,7 @@ class SignalFutur
 
     #[ORM\Column]
     #[Groups(["futur"])]
-    private ?bool $isPublic = null;
+    private ?bool $isPublic = true;
 
     #[ORM\OneToMany(mappedBy: 'signalFutur', targetEntity: Target::class)]
     #[Groups(["futur"])]
