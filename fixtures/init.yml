@@ -6,3 +6,8 @@ App\Entity\User:
     email: stili.salim@yahoo.fr
     password: <{hash}>
     roles: ["ROLE_ADMIN"]
+
+  user_2:
+    email: test@gmail.com
+    password: <{hash}>
+    roles: ["ROLE_SUBSCRIBER"]
