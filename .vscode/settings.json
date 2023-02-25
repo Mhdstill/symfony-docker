@@ -1,0 +1,23 @@
+{
+    "php.validate.executablePath": "/opt/homebrew/bin/php",
+    "php.executablePath": "/opt/homebrew/bin/php",
+    "php.suggest.basic": false,
+    "php.suggest.importFQNCompleter": true,
+    "php.suggest.importFullPath": true,
+    "php.suggest.importAlias": true,
+    "php.suggest.complete": true,
+    "php.suggest.useCodeSnippetsOnMethodSuggest": true,
+    "php.suggest.useFQN": false,
+    "php.validate.run": "onType",
+    "editor.suggestSelection": "first",
+    "php.suggest.completeFunctionCalls": true,
+    "php.suggest.completionProvider": "intelephense",
+    "php.validate.enable": true,
+    "php.validate.enableInlineHtml": true,
+    "php.suggest.classNames": true,
+    "php.suggest.namespaces": true,
+    "php.suggest.showBuiltInSymbols": false,
+    "editor.parameterHints": true,
+    "php.suggest.showErrors": true
+
+}
