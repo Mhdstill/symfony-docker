@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SignalFuturRepository::class)]
 #[ApiResource(
-    normalizationContext: ['groups' => ['futur']],
+    normalizationContext: ['groups' => ['futur', 'get']],
 )]
 #[Post(
     security: "is_granted('ROLE_ADMIN')",
@@ -69,13 +69,11 @@ class SignalFutur
     #[Groups(["futur"])]
     private ?bool $isPublic = true;
 
-    #[ORM\OneToMany(mappedBy: 'signalFutur', targetEntity: Target::class)]
-    #[Groups(["futur"])]
-    private Collection $targets;
+    #[ORM\Column]
+    private ?bool $isActive = true;
 
     public function __construct()
     {
-        $this->targets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -155,33 +153,16 @@ class SignalFutur
         return $this;
     }
 
-    /**
-     * @return Collection<int, Target>
-     */
-    public function getTargets(): Collection
+    public function isIsActive(): ?bool
     {
-        return $this->targets;
+        return $this->isActive;
     }
 
-    public function addTarget(Target $target): self
+    public function setIsActive(bool $isActive): self
     {
-        if (!$this->targets->contains($target)) {
-            $this->targets->add($target);
-            $target->setSignalFutur($this);
-        }
+        $this->isActive = $isActive;
 
         return $this;
     }
 
-    public function removeTarget(Target $target): self
-    {
-        if ($this->targets->removeElement($target)) {
-            // set the owning side to null (unless already changed)
-            if ($target->getSignalFutur() === $this) {
-                $target->setSignalFutur(null);
-            }
-        }
-
-        return $this;
-    }
 }

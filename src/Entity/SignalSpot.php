@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SignalSpotRepository::class)]
 #[ApiResource(
-    normalizationContext: ['groups' => ['spot']],
+    normalizationContext: ['groups' => ['spot', 'get']],
 )]
 #[Post(
     security: "is_granted('ROLE_ADMIN')",
@@ -61,13 +61,11 @@ class SignalSpot
     #[Groups(["spot"])]
     private ?bool $isPublic = true;
 
-    #[ORM\OneToMany(mappedBy: 'signalSpot', targetEntity: Target::class)]
-    #[Groups(["spot"])]
-    private Collection $targets;
+    #[ORM\Column]
+    private ?bool $isActive = true;
 
     public function __construct()
     {
-        $this->targets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -123,32 +121,14 @@ class SignalSpot
         return $this;
     }
 
-    /**
-     * @return Collection<int, Target>
-     */
-    public function getTargets(): Collection
+    public function isIsActive(): ?bool
     {
-        return $this->targets;
+        return $this->isActive;
     }
 
-    public function addTarget(Target $target): self
+    public function setIsActive(bool $isActive): self
     {
-        if (!$this->targets->contains($target)) {
-            $this->targets->add($target);
-            $target->setSignalSpot($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTarget(Target $target): self
-    {
-        if ($this->targets->removeElement($target)) {
-            // set the owning side to null (unless already changed)
-            if ($target->getSignalSpot() === $this) {
-                $target->setSignalSpot(null);
-            }
-        }
+        $this->isActive = $isActive;
 
         return $this;
     }
