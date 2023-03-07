@@ -70,6 +70,7 @@ class SignalFutur
     private ?bool $isPublic = true;
 
     #[ORM\Column]
+    #[Groups(["futur"])]
     private ?bool $isActive = true;
 
     public function __construct()

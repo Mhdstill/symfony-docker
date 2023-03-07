@@ -62,6 +62,7 @@ class SignalSpot
     private ?bool $isPublic = true;
 
     #[ORM\Column]
+    #[Groups(["spot"])]
     private ?bool $isActive = true;
 
     public function __construct()
