@@ -73,6 +73,22 @@ class SignalFutur
     #[Groups(["futur"])]
     private ?bool $isActive = true;
 
+    #[ORM\Column(nullable: true)]
+    #[Groups(["futur"])]
+    private ?float $target1 = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups(["futur"])]
+    private ?float $target2 = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups(["futur"])]
+    private ?float $target3 = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups(["futur"])]
+    private ?float $target4 = null;
+
     public function __construct()
     {
     }
@@ -162,6 +178,54 @@ class SignalFutur
     public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getTarget1(): ?float
+    {
+        return $this->target1;
+    }
+
+    public function setTarget1(?float $target1): self
+    {
+        $this->target1 = $target1;
+
+        return $this;
+    }
+
+    public function getTarget2(): ?float
+    {
+        return $this->target2;
+    }
+
+    public function setTarget2(?float $target2): self
+    {
+        $this->target2 = $target2;
+
+        return $this;
+    }
+
+    public function getTarget3(): ?float
+    {
+        return $this->target3;
+    }
+
+    public function setTarget3(?float $target3): self
+    {
+        $this->target3 = $target3;
+
+        return $this;
+    }
+
+    public function getTarget4(): ?float
+    {
+        return $this->target4;
+    }
+
+    public function setTarget4(?float $target4): self
+    {
+        $this->target4 = $target4;
 
         return $this;
     }
